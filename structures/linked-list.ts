@@ -1,29 +1,14 @@
-interface SingleNode {
-  val: any;
-  next?: SingleNode;
-}
-
-class LinkedListNode {
-  constructor(Node) {
-    
+export class SingleNode {
+  constructor(
+    public val: any,
+    public next?: SingleNode) {
   }
 }
 
-function nodeToNumber(node: SingleNode): number {
-  const result = [];
-  while (node.next !== null) {
-    result.unshift(node.val);
+export class LinkedListNode {
+  private head: SingleNode;
+
+  constructor(node: SingleNode) {
+    this.head = node;
   }
-  return Number(result.join(''));
 }
-
-function numberToNode() {
-
-}
-
-export const addTwoNumbers = (l1: SingleNode, l2: SingleNode): SingleNode => {
-  const l1Num = nodeToNumber(l1);
-  const l2Num = nodeToNumber(l2);
-  const resultNum = l1Num + l2Num;
-
-};

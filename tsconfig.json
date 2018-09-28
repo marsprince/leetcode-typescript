@@ -15,7 +15,8 @@
     "baseUrl": "./src"
   },
   "include": [
-    "src/**/*"
+    "algorithms/**/*",
+    "structures/**/*"
   ],
   "exclude": [
     "node_modules",
