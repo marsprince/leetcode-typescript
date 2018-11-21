@@ -12,11 +12,13 @@
     "sourceMap": false,
     "allowJs": true,
     "outDir": "./dist",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "jsx": "preserve"
   },
   "include": [
     "algorithms/**/*",
-    "structures/**/*"
+    "structures/**/*",
+    "base/**/*"
   ],
   "exclude": [
     "node_modules",

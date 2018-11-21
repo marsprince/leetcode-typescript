@@ -1,3 +1,6 @@
+export type VNode = VNodeElement | string;
+export type DOMNode = HTMLElement | Text;
+
 export interface VNodeProps {
   [key: string]: string | number;
 }
@@ -8,4 +11,7 @@ export interface VNodeElement {
   children?: VNode[];
 }
 
-export type VNode = VNodeElement | string;
+export interface QueueNode {
+  vnode: VNode;
+  parentElement?: DOMNode;
+}
