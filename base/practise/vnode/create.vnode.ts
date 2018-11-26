@@ -1,4 +1,4 @@
-import { VNode, VNodeProps, DOMNode, QueueNode, CreateElement } from './types';
+import { VNode, VNodeProps, DOMNode, QueueNode } from './types';
 
 function createNode(vnode: VNode): DOMNode {
   const doc = document;

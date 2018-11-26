@@ -18,10 +18,14 @@
   "include": [
     "algorithms/**/*",
     "structures/**/*",
-    "base/**/*"
+    "base/**/*",
+    "type/**/*"
   ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
+  ],
+  "typeRoots": [
+    "./type"
   ]
 }
