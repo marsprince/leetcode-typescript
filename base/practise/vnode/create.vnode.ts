@@ -55,6 +55,8 @@ export function createElement(vnode: VNode): DOMNode {
         }
       }
     }
+  } else {
+    result = createNode(vnode);
   }
   return result;
 }

@@ -1,5 +1,5 @@
 export type VNode = VNodeElement | string | number;
-export type DOMNode = HTMLElement | Text;
+export type DOMNode = Node;
 
 export interface VNodeProps {
   [key: string]: string | number;

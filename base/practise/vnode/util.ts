@@ -1,4 +1,4 @@
-import { VNode, VNodeElement } from './types';
+import { DOMNode, VNode, VNodeElement } from './types';
 
 export function isUndefined(val: any): boolean {
   return typeof val === 'undefined';
@@ -22,4 +22,12 @@ export function isSameVNode(oldVNode: VNode, newVNode: VNode): boolean {
   } else {
     return false;
   }
+}
+
+export function isTextNode(domNode: DOMNode) {
+  return domNode.nodeType === 3;
+}
+
+export function createEmptyNode() {
+  return document.createElement('div');
 }

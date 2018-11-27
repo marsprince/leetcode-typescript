@@ -1,7 +1,9 @@
-import { VNodeProps, VNode } from './create';
+import { VNode } from './create';
 
-export interface PatchVNodeProps extends VNodeProps {
+export interface PatchVNodeProps {
   type: NodePropsTypes;
+  key: string;
+  value?: string | number;
 }
 
 export interface PatchObject {
@@ -9,6 +11,7 @@ export interface PatchObject {
   vnode: VNode;
   props?: PatchVNodeProps[];
   children?: PatchObject[];
+  childIndex?: number;
 }
 
 export enum NodePatchTypes {

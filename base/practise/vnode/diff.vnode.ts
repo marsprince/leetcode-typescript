@@ -1,4 +1,4 @@
-import { VNode, VNodeElement } from './types';
+import { VNode, VNodeElement } from './types/index';
 import { NodePatchTypes, NodePropsTypes, PatchObject, PatchVNodeProps } from './types/patch';
 import { isUndefined, isSameVNode } from './util';
 
@@ -12,13 +12,14 @@ function diffProps(oldVNode: VNodeElement, newVNode: VNodeElement): PatchVNodePr
       if (isUndefined(oldValue) || oldValue !== newValue) {
         total.push({
           type: NodePropsTypes.UPDATE,
-          [key]: newValue,
+          key,
+          value: newValue,
         });
       }
     } else {
       total.push({
         type: NodePropsTypes.REMOVE,
-        [key]: oldValue,
+        key,
       });
     }
     return total;
@@ -31,6 +32,7 @@ function diffChildrens(oldVNodeChildrens: VNode[], newVNodeChildrens: VNode[]): 
   for (let i = 0; i < maxLength; i++) {
     const patchObj = diff(oldVNodeChildrens[i], newVNodeChildrens[i]);
     if (!isUndefined(patchObj)) {
+      patchObj.childIndex = i;
       patches.push(patchObj);
     }
   }
