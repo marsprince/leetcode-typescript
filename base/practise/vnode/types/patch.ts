@@ -7,8 +7,8 @@ export interface PatchVNodeProps extends VNodeProps {
 export interface PatchObject {
   type: NodePatchTypes;
   vnode: VNode;
-  props: PatchVNodeProps;
-  children: PatchObject[];
+  props?: PatchVNodeProps[];
+  children?: PatchObject[];
 }
 
 export enum NodePatchTypes {

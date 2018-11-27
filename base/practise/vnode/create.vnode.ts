@@ -1,9 +1,9 @@
-import { VNode, VNodeProps, DOMNode, QueueNode } from './types';
+import { VNode, VNodeProps, VNodeElement, DOMNode, QueueNode } from './types';
 
 function createNode(vnode: VNode): DOMNode {
   const doc = document;
   if (typeof vnode === 'string' || typeof vnode === 'number') {
-    return doc.createTextNode(vnode);
+    return doc.createTextNode(vnode.toString());
   } else {
     const { tagName, props } = vnode;
     const element = doc.createElement(tagName);
@@ -23,7 +23,7 @@ function setProps(element: HTMLElement, props: VNodeProps) {
 export function createElement(vnode: VNode): DOMNode {
   const doc = document;
   if (typeof vnode === 'string' || typeof vnode === 'number') {
-    return doc.createTextNode(vnode);
+    return doc.createTextNode(vnode.toString());
   }
 
   // 3.循环
@@ -44,9 +44,9 @@ export function createElement(vnode: VNode): DOMNode {
       }
       if (typeof el.vnode !== 'string') {
         const node: VNode = el.vnode;
-        const children: any = node.children;
+        const children: any = (node as VNodeElement).children;
         if (Array.isArray(children) && children.length !== 0) {
-          node.children.forEach(nextNode => {
+          children.forEach(nextNode => {
             queue.push({
               vnode: nextNode,
               parentElement: element,

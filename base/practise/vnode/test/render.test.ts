@@ -1,6 +1,8 @@
+import { diff } from '../diff.vnode';
+
 const demoNode1 = {
   tagName: 'ul',
-  props: { class: 'demo1' },
+  props: { class: 'demo1', id: 'test' },
   children: [
     { tagName: 'li', children: ['douyin'] },
     { tagName: 'li', children: ['toutiao'] },
@@ -15,3 +17,5 @@ const demoNode2 = {
     { tagName: 'li', children: ['fb'] },
   ],
 };
+
+console.log(diff(demoNode1, demoNode2));

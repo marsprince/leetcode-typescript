@@ -1,4 +1,4 @@
-export type VNode = VNodeElement | string;
+export type VNode = VNodeElement | string | number;
 export type DOMNode = HTMLElement | Text;
 
 export interface VNodeProps {
