@@ -9,6 +9,7 @@ export interface VNodeElement {
   tagName?: string;
   props?: VNodeProps;
   children?: VNode[];
+  key?: string | number;
 }
 
 export interface QueueNode {

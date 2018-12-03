@@ -1,5 +1,10 @@
 import { VNode } from './create';
 
+export interface DiffWithoutKey {
+  index: number;
+  vnode: VNode;
+}
+
 export interface PatchVNodeProps {
   type: NodePropsTypes;
   key: string;
