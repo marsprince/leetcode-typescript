@@ -1,9 +1,3 @@
-const test = [1, 2, 3, 4, 5];
+import { isString, isNumber } from '../util/index';
 
-for (let i = 0; i < 5; i++) {
-  if (test[i] > 2) {
-    test.splice(i, 1);
-  }
-}
-
-console.log(test);
+console.log(isNumber(123));
