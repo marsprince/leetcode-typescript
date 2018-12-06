@@ -116,27 +116,23 @@ export class Promise {
   }
 }
 
-// test
 const x = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve(1);
   }, 1000);
 });
 
-const y = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(2000);
-  }, 100);
-});
-
-const z = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(1000);
-  }, 100);
-});
-Promise.race([x, y, z]).then(datas => {
-  console.log(datas);
-});
+const y = (id) => {
+  console.log(id);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(id + 1000);
+    }, 100);
+  });
+};
+x.then(y).then((data) => {
+  console.log(data);
+})
 // Promise.resolve('hello').finally(function(value) {
 //   console.log(value);
 // });
