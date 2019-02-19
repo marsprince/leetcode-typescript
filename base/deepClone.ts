@@ -3,7 +3,7 @@ function isObject(x) {
 }
 
 function isArray(x) {
-  return Object.prototype.toString.call(x) === '[object Array]';
+  return Array.isArray(x);
 }
 
 function createData(deep, breadth) {
@@ -39,7 +39,9 @@ export const deepCloneJSON = (source) => {
 };
 
 // 循环，类似于深度遍历二叉树
-export const deepCloneCircle = (source: object, isForce?: boolean) => {
+// 原型
+// proxy
+export const deepCloneCircle = (source: object, isForce?: boolean, excludes?: any[]) => {
   if (typeof source !== 'object') return source;
   // 最后的返回，初始化
   const target: any = isArray(source) ? [] : {};
@@ -71,28 +73,29 @@ export const deepCloneCircle = (source: object, isForce?: boolean) => {
         });
       }
     }
-    for (const k in node) {
-      if (node.hasOwnProperty(k)) {
-        _target[k] = isArray(node[k]) ? [] : {};
-        if (typeof node[k] === 'object') {
-          // 下一次循环
-          stack.push({
-            target: _target,
-            key: k,
-            node: node[k],
-          });
-        } else {
-          _target[k] = node[k];
-        }
+    Object.keys(node).forEach(k => {
+      if (excludes && excludes.includes(k)) {
+        return;
       }
-    }
+      _target[k] = isArray(node[k]) ? [] : {};
+      if (isObject(node[k]) || isArray(node[k])) {
+        // 下一次循环
+        stack.push({
+          target: _target,
+          key: k,
+          node: node[k],
+        });
+      } else {
+        _target[k] = node[k];
+      }
+    });
   }
   return target;
 };
 
 // 保持引用关系, 破解循环引用
-export const deepCloneForce = (source: object) => {
-  return deepCloneCircle(source, true);
+export const deepCloneForce = (source: object, excludes?: any[]) => {
+  return deepCloneCircle(source, true, excludes);
 };
 
 const test = [{ m: 1 }, 2, 3];
@@ -106,7 +109,7 @@ const sourceObject: any = {
   c: 3,
 };
 sourceObject.d = sourceObject;
-const deepClone: any = deepCloneForce(sourceObject);
+const deepClone: any = deepCloneForce(sourceObject, ['c']);
 
 // deepClone.a[0] = { m: 2 };
 // deepClone.b = [1];

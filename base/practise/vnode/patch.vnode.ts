@@ -1,7 +1,7 @@
 import { DOMNode } from './types';
 import { NodePatchTypes, NodePropsTypes, PatchObject, PatchVNodeProps } from './types/patch';
 import { isTextNode, isUndefined, createEmptyNode } from './util';
-import { createElement } from './create.vnode';
+import { createNodeTree } from './create.vnode';
 
 function patchProps(domNode: Node, patchPropList: PatchVNodeProps[]) {
   patchPropList.forEach(patchProp => {
@@ -36,20 +36,20 @@ function _patch(parentNode: DOMNode, patchObj?: PatchObject, index = 0) {
   const element = parentNode.childNodes[index];
 
   if (isUndefined(element)) {
-    parentNode.appendChild(createElement(patchObj.vnode));
+    parentNode.appendChild(createNodeTree(patchObj.vnode));
     return;
   }
   if (isTextNode(element)) {
-    parentNode.replaceChild(createElement(patchObj.vnode), element);
+    parentNode.replaceChild(createNodeTree(patchObj.vnode), element);
     return;
   }
 
   switch (patchObj.type) {
     case NodePatchTypes.CREATE:
-      parentNode.appendChild(createElement(patchObj.vnode));
+      parentNode.appendChild(createNodeTree(patchObj.vnode));
       break;
     case NodePatchTypes.REPLACE:
-      parentNode.replaceChild(createElement(patchObj.vnode), element);
+      parentNode.replaceChild(createNodeTree(patchObj.vnode), element);
       break;
     case NodePatchTypes.REMOVE:
       parentNode.removeChild(element);

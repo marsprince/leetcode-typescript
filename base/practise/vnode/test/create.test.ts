@@ -1,4 +1,4 @@
-import { createElement } from '../create.vnode';
+import { createNodeTree } from '../create.vnode';
 
 function createDemoNode(deep) {
   const result: any = {};
@@ -24,4 +24,4 @@ const demoNode = {
 };
 
 const dataNode = createDemoNode(2);
-console.log(createElement(dataNode));
+console.log(createNodeTree(dataNode));

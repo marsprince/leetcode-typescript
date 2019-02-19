@@ -1,6 +1,6 @@
 import { diff } from '../diff.vnode';
 import { patch } from '../patch.vnode';
-import { createElement } from '../create.vnode';
+import { createNodeTree } from '../create.vnode';
 
 const demoNode1 = {
   tagName: 'ul',
@@ -26,7 +26,7 @@ const demoNode2 = {
   ],
 };
 
-// const oldNode = createElement(demoNode1);
+// const oldNode = createNodeTree(demoNode1);
 const patchObj = diff(demoNode1, demoNode2);
 // const newNode = patch(oldNode, patchObj);
 console.log(patchObj.children);

@@ -13,7 +13,8 @@
     "allowJs": true,
     "outDir": "./dist",
     "baseUrl": "./src",
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "lib": ["dom", "es2017"]
   },
   "include": [
     "algorithms/**/*",

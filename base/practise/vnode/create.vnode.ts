@@ -1,7 +1,12 @@
 import { VNode, VNodeProps, VNodeElement, DOMNode, QueueNode } from './types';
 
+const doc = document;
+
+/**
+ * 创建单一dom
+ * @param vnode
+ */
 function createNode(vnode: VNode): DOMNode {
-  const doc = document;
   if (typeof vnode === 'string' || typeof vnode === 'number') {
     return doc.createTextNode(vnode.toString());
   } else {
@@ -12,6 +17,11 @@ function createNode(vnode: VNode): DOMNode {
   }
 }
 
+/**
+ * 设置属性
+ * @param element
+ * @param props
+ */
 function setProps(element: HTMLElement, props: VNodeProps) {
   for (const key in props) {
     if (props.hasOwnProperty(key)) {
@@ -20,19 +30,19 @@ function setProps(element: HTMLElement, props: VNodeProps) {
   }
 }
 
-export function createElement(vnode: VNode): DOMNode {
-  const doc = document;
+/**
+ * 创建dom树
+ * @param vnode
+ */
+export function createNodeTree(vnode: VNode): DOMNode {
   if (typeof vnode === 'string' || typeof vnode === 'number') {
     return doc.createTextNode(vnode.toString());
   }
-
-  // 3.循环
-  // 1.循环一层的
-  const queue: QueueNode[] = [{
-    vnode,
-  }];
   let result: any;
   if (vnode.children && vnode.children.length !== 0) {
+    const queue: QueueNode[] = [{
+      vnode,
+    }];
     while (queue.length !== 0) {
       const el = queue.shift();
       const element = createNode(el.vnode);
@@ -44,7 +54,7 @@ export function createElement(vnode: VNode): DOMNode {
       }
       if (typeof el.vnode !== 'string') {
         const node: VNode = el.vnode;
-        const children: any = (node as VNodeElement).children;
+        const children = (node as VNodeElement).children;
         if (Array.isArray(children) && children.length !== 0) {
           children.forEach(nextNode => {
             queue.push({

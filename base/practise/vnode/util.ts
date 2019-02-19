@@ -31,3 +31,7 @@ export function isTextNode(domNode: DOMNode) {
 export function createEmptyNode() {
   return document.createElement('div');
 }
+
+export function createTextNode(text: string) {
+  return document.createTextNode(text);
+}
