@@ -19,6 +19,9 @@ export function checkArray(originalArray) {
 // is a simple sorting algorithm that repeatedly steps through the list to be sorted,
 // compares each pair of adjacent items and swaps them if they are in the wrong order (ascending or descending arrangement).
 // The pass through the list is repeated until no swaps are needed, which indicates that the list is sorted.
+
+// 冒泡排序
+// 每一次沉一个最大的到最后
 export function BubbleSort(originalArray) {
   // Flag that holds info about whether the swap has occur or not.
   let swapped = false;
@@ -48,3 +51,43 @@ export function BubbleSort(originalArray) {
   return array;
 }
 
+// 选择排序
+// 每趟选择一个最小的，记录索引，最后交换
+export function SelectionSort(originArray) {
+  const arr = [...originArray];
+  for (let i = 0; i < arr.length; i++) {
+    let min = i;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[j] < arr[min]) min = j;
+    }
+    if (min !== i) {
+      [arr[i], arr[min]] = [arr[min], arr[i]];
+    }
+  }
+  return arr;
+}
+
+// 插入排序
+// 相当于向前冒泡
+export function InsertionSort(originalArray) {
+  const array = [...originalArray];
+
+  // Go through all array elements...
+  for (let i = 0; i < array.length; i += 1) {
+    let currentIndex = i;
+    // Go and check if previous elements and greater then current one.
+    // If this is the case then swap that elements.
+    for (let j = i - 1; j >= 0; j--) {
+      if (lessThan(array[currentIndex], array[j])) {
+        [array[currentIndex], array[j]] = [array[j], array[currentIndex]];
+        currentIndex = j;
+      } else {
+        break;
+      }
+    }
+  }
+
+  return array;
+}
+
+console.log(InsertionSort([4, 2, 1, 5, 3]));
