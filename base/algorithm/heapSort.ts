@@ -3,10 +3,15 @@
 // 堆有唯一索引，类似数组，因此一个数组就可以看成是一个堆
 // 核心，每次构造一个最大（小）堆，因为它能保证根是最大的，第二大的无法保证
 // 然后拿掉根元素，扔到数组最后，对剩下的堆排序，直至剩一个位置
+
+// 整体逻辑
+//
+
 /* eslint-disable*/
 // 堆是完全二叉树
 // 二叉树性质
 // 1.二叉树第i层上的结点数目最多为 2^(i-1) (i≥1)
+// 3.包含n个结点的二叉树的高度至少为log2 (n+1)
 class Heap {
   constructor(heapContainer = []) {
     this.heapContainer = heapContainer;
@@ -33,11 +38,11 @@ class Heap {
 
   // 是否有左子节点
   hasLeftChild(index) {
-    return this.getLeftChildIndex(index) < this.heapContainer.length
+    return this.getLeftChildIndex(index) < this.heapContainer.length;
   }
 
   hasRightChild(index) {
-    return this.getRightChildIndex(index) < this.heapContainer.length
+    return this.getRightChildIndex(index) < this.heapContainer.length;
   }
 
   getParentIndex(leftChildIndex) {
@@ -80,7 +85,7 @@ class Heap {
   heapifyDown(startIndex) {
     // 找出左、右和根三个结点中最大或最小
     let currentIndex = startIndex || 0;
-    let nextIndex ;
+    let nextIndex;
     // 如果有左子节点
     while (this.hasLeftChild(currentIndex)) {
       // 如果有右边的子节点并且右比左大（小）
@@ -91,7 +96,7 @@ class Heap {
   }
 
   pairIsInCorrectOrder(first, second) {
-    return first > second
+    return first > second;
   }
 }
 

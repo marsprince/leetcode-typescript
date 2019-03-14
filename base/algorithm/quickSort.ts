@@ -77,16 +77,14 @@ export function quickSortInPlace(
      * @param {number} rightIndex
      */
     const swap = (leftIndex, rightIndex) => {
-      const temp = array[leftIndex];
-      array[leftIndex] = array[rightIndex];
-      array[rightIndex] = temp;
+      [array[leftIndex], array[rightIndex]] = [array[rightIndex], array[leftIndex]];
     };
 
     const pivot = array[highIndex];
 
     let partitionIndex = lowIndex;
     for (let currentIndex = lowIndex; currentIndex < highIndex; currentIndex += 1) {
-      if (this.comparator.lessThan(array[currentIndex], pivot)) {
+      if (lessThan(array[currentIndex], pivot)) {
         swap(partitionIndex, currentIndex);
         partitionIndex += 1;
       }
@@ -111,3 +109,5 @@ export function quickSortInPlace(
 
   return array;
 }
+
+console.log(quickSortInPlace([2, 4, 1, 5, 3]));
