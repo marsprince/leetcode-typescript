@@ -206,6 +206,25 @@ MyPromise.isMyPromise = function(obj) {
   return obj instanceof MyPromise;
 };
 
+MyPromise.prototype.catch = function(onRejected) {
+  return this.then(null, onRejected);
+};
+
+MyPromise.prototype.finally = function(cb) {
+  return this.then(
+    function(value) {
+      return MyPromise.resolve(cb()).then(function() {
+        return value;
+      });
+    },
+    function(reason) {
+      return MyPromise.resolve(cb()).then(function() {
+        throw reason;
+      });
+    }
+  );
+}
+
 // for test
 MyPromise.deferred = function() {
   const defer = {};
